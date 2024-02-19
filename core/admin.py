@@ -26,3 +26,9 @@ class JudgeAdmin(admin.ModelAdmin):
 @admin.register(EventJudges)
 class EventJudgesAdmin(admin.ModelAdmin):
     pass
+
+
+
+
+admin.site.site_header = "EventRave"
+admin.site.site_title = "EventRave"
