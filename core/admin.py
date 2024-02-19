@@ -30,5 +30,5 @@ class EventJudgesAdmin(admin.ModelAdmin):
 
 
 
-admin.site.site_header = "EventRave"
-admin.site.site_title = "EventRave"
+admin.site.site_header = "Event-Rave"
+admin.site.site_title = "Event-Rave"
