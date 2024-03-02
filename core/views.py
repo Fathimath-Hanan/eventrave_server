@@ -4,7 +4,8 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from core.models import Participant, Event, Judge, Score
 from core.serializers import EventSerializer, ParticipantSerializer, JudgeSerializer, ScoreSerializer, CertificateSerializer
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # Create your views here.
 class EventListAPIView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
@@ -48,4 +49,8 @@ class JudgeListAPIView(generics.ListCreateAPIView):
 class JudgeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Judge.objects.all()
     serializer_class = JudgeSerializer
-
+class StudentHomeAPIView(APIView):
+    def get(self, request):
+        events = Event.objects.all()
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
