@@ -3,10 +3,6 @@ from account.views import CustomUserSerializer
 
 from core.models import EventJudges, Judge, Participant, Event, Certificate, Score
 
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        fields = '__all__'
 
 
 class ParticipantSerializer(serializers.ModelSerializer):
