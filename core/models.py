@@ -8,6 +8,7 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField()
     venue = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='event_images/')
     max_participants = models.IntegerField()
 
     
