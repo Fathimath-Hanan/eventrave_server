@@ -73,3 +73,6 @@ class StudentHomeAPIView(APIView):
             "all_events": all_events_serializer.data,
             "current_std_events": matching_events_serializer.data
         })
+        events = Event.objects.all()
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
