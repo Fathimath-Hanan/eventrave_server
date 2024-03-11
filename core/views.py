@@ -1,5 +1,18 @@
+from django.shortcuts import render
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter, SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from core.models import Participant, Event, Judge, Score
+from core.serializers import EventSerializer, ParticipantSerializer, JudgeSerializer, ScoreSerializer, CertificateSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
+class EventListAPIView(generics.ListCreateAPIView):
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    search_fields = ['name']
 
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 class EventDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -35,7 +48,8 @@ class JudgeListAPIView(generics.ListCreateAPIView):
 class JudgeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Judge.objects.all()
     serializer_class = JudgeSerializer
-    
+
+
 class StudentHomeAPIView(APIView):
     def get(self, request):
         # Retrieve all events
@@ -80,7 +94,6 @@ class JudgeHomeAPIView(APIView):
         
         # Return the serialized data
         return Response({
-            "all_events": all_events_serializer.data,
             "current_judge_events": matching_events_serializer.data
         })
 

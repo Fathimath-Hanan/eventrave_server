@@ -50,7 +50,10 @@ class CertificateSerializer(serializers.ModelSerializer):
         model = Certificate
         fields = '__all__'
 
-
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
     
 # class CertificateSerializer(serializers.ModelSerializer):
 #     class Meta:
