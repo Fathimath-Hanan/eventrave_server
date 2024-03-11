@@ -31,7 +31,7 @@ class Participant(models.Model):
         return self.user.username
 
 class Judge(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     assigned_events = models.ManyToManyField(Event, related_name='judges')
     
     def __str__(self):
