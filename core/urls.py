@@ -22,5 +22,4 @@ urlpatterns = [
 urlpatterns = [
     path('', include('core.api.common.urls')),
     path('student/', include('core.api.student.urls')),
-   
 ]
