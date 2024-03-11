@@ -18,4 +18,9 @@ urlpatterns = [
     path('judge/<int:pk>/',JudgeDetailAPIView.as_view()),
     path('studenthome/',StudentHomeAPIView.as_view()),
     path('judgehome/',JudgeHomeAPIView.as_view())
+
+urlpatterns = [
+    path('', include('core.api.common.urls')),
+    path('student/', include('core.api.student.urls')),
+   
 ]
