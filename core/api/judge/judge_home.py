@@ -18,8 +18,8 @@ class JudgeHomeAPIView(APIView):
         matching_events = Event.objects.filter(judges__in=matching_judge_events)
         
         # Serialize the events
-        all_events_serializer = EventSerializer(all_events, many=True)
-        matching_events_serializer = EventSerializer(matching_events, many=True)
+        all_events_serializer = EventSerializer(all_events, many=True, context={'request': request})
+        matching_events_serializer = EventSerializer(matching_events, many=True, context={'request': request})
         
         # Return the serialized data
         return Response({
