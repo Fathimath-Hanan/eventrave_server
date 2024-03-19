@@ -2,7 +2,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from core.api.common.events import EventSerializer
-from core.models import Event, Participant
+from core.models import Event,EventRegistration
 
 
 class StudentHomeAPIView(APIView):
@@ -13,19 +13,17 @@ class StudentHomeAPIView(APIView):
         # Get the user ID of the logged-in user if authenticated
         user_id = request.user.id if request.user.is_authenticated else None
         
-        # Filter participants based on the user ID of the logged-in user if authenticated
-        matching_participants = Participant.objects.filter(user_id=user_id) if user_id else []
         
-        # Get events registered for the matching participants
-        matching_events = Event.objects.filter(participants__in=matching_participants)
+        registered_events = Event.objects.filter(registrations__student__id=user_id)
+        
         
         # Serialize the events
         all_events_serializer = EventSerializer(all_events, many=True, context={'request': request})
-        matching_events_serializer = EventSerializer(matching_events, many=True, context={'request': request})
+        registered_events_serializer = EventSerializer(registered_events, many=True, context={'request': request})
         
         # Return the serialized data
         return Response({
             "all_events": all_events_serializer.data,
-            "registered": matching_events_serializer.data
+            "registered": registered_events_serializer.data
         })
         
