@@ -13,6 +13,7 @@ class EventSerializer(serializers.ModelSerializer):
 class EventListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     search_fields = ['name']
+    filterset_fields = ['status','judges']
 
     queryset = Event.objects.all()
     serializer_class = EventSerializer
