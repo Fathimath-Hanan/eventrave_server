@@ -73,7 +73,7 @@ class CertificateGenerator:
         outputStream.close()
         print("created " + name + id + ".pdf")
             
-        return destination
+        return str(destination).replace("media/", "")
 
 
 # CertificateGenerator.generate(data=[
