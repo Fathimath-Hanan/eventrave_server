@@ -12,5 +12,5 @@ from core.api.common.events import EventDetailAPIView, EventListCreateAPIView
 urlpatterns = [
     path('events/',EventListCreateAPIView.as_view()),
     path('events/<int:pk>/',EventDetailAPIView.as_view()),
-    path('pariticipants/<int:event_id>/', EventParticipantsListAPIView.as_view()),
+    path('participants/<int:event_id>/', EventParticipantsListAPIView.as_view()),
 ]
