@@ -13,4 +13,7 @@ class EventParticipantsListAPIView(APIView):
     def get(self, request, event_id):
         participants = EventRegistration.objects.filter(event_id=event_id)
         participants_serializer = EventRegistrationSerializer(participants, many=True)
-        return Response(participants_serializer.data, status=status.HTTP_200_OK)
+        return Response({
+            "participant_events": participants_serializer.data
+            })
+        
