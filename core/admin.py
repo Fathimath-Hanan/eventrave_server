@@ -4,6 +4,7 @@ from core.models import Certificate, EventRegistration,JudgeScore,Event
 # Register your models here.
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
+    filter_horizontal = ['judges']
     pass
 
 @admin.register(EventRegistration)

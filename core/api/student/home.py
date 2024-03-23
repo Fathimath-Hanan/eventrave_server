@@ -3,6 +3,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from core.api.common.events import EventSerializer
 from core.models import Event,EventRegistration
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class StudentHomeAPIView(APIView):
