@@ -54,12 +54,12 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
 
             user = CustomUser.objects.create(
                 batch_year=batch_year,
-                is_active=False,
+                is_active=True,
                 **validated_data
             )
             user.set_password(validated_data['password'])
             user.save()
-            send_otp_email(email)
+            # send_otp_email(email)
         
         if role == CustomUser.USER_ROLES.JUDGE:
             user = CustomUser.objects.create(
@@ -105,9 +105,9 @@ class CustomUserRegistrationView(APIView):
         serializer.is_valid(raise_exception=True)   
         serializer.save()
 
-        if role == CustomUser.USER_ROLES.STUDENT:
-            return Response({'message': 'CustomUser registered successfully. Check your email for otp.'},
-                        status=status.HTTP_201_CREATED, )
+        # if role == CustomUser.USER_ROLES.STUDENT:
+        #     return Response({'message': 'CustomUser registered successfully. Check your email for otp.'},
+        #                 status=status.HTTP_201_CREATED, )
         return Response({'message': 'User registered successfully.'},
                         status=status.HTTP_201_CREATED, )
 
