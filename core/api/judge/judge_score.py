@@ -9,10 +9,11 @@ from core.models import EventRegistration, JudgeScore
 
 class JudgeScoreListCreateAPIView(APIView):
 
+
     def post(self, request, *args, **kwargs):
         event_registration_id = request.data.get('event_registration')
         score = request.data.get('score')
-        judge = request.data.get('judge')
+        judge = request.user
         comment = request.data.get('comment')
         try:
             event_registration = EventRegistration.objects.get(id=event_registration_id)
@@ -28,5 +29,7 @@ class JudgeScoreListCreateAPIView(APIView):
                     score=score,
                     comment=comment
                 )
+
+            return Response({"message": "Score updated successfully"}, status=status.HTTP_200_OK)
         except EventRegistration.DoesNotExist:
             return Response({"message": "Event registration not found"}, status=status.HTTP_404_NOT_FOUND)
