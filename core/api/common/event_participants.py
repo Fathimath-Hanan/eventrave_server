@@ -13,7 +13,8 @@ class EventRegistrationSerializer(serializers.ModelSerializer):
         ]
 
     def get_is_scored(self, obj):
-        judge = self.request.user
+        
+        judge = self.context['request'].user
         return obj.judge_scores.filter(judge=judge).exists()
         
 class EventParticipantsListAPIView(APIView):
