@@ -20,7 +20,7 @@ class Event(models.Model):
     is_onstage = models.BooleanField(default=True, help_text='True for onstage events, False for offstage events.')
     datetime = models.DateTimeField()
     venue = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='events/', blank=True)
+    image = models.ImageField(upload_to='events/', )
     is_group_event = models.BooleanField(default=False)
     group_limit = models.PositiveIntegerField(null=True, blank=True, help_text='Limit for group participation if this is a group event.')
     judges = models.ManyToManyField(CustomUser, related_name='events_as_judge', blank=True)

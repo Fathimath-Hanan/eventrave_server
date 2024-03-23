@@ -17,6 +17,14 @@ class StudentEventRegisterAPIView(APIView):
         if event_id is None:
             return Response({"error": "Event ID is required"}, status=status.HTTP_400_BAD_REQUEST)
         
+        # check any member is already registered the event
+        for member in members:
+            if EventRegistration.objects.filter(event_id=event_id, student_id=member).exists():
+                return Response({"error": "Member is already registered"}, status=status.HTTP_400_BAD_REQUEST)
+            #check whether members is already member in the event
+            if EventRegistration.objects.filter(event_id=event_id,members=member).exists():
+                return Response({"error": "Member is already registered"}, status=status.HTTP_400_BAD_REQUEST)
+        
         # Get the participant object based on the user ID
         participant = EventRegistration.objects.filter(event_id=event_id, student_id=user_id).first()
         
@@ -25,7 +33,8 @@ class StudentEventRegisterAPIView(APIView):
             participant = EventRegistration.objects.create(event_id=event_id, student_id=user_id)
             participant.members.set(members)
             participant.save()
-            
+        
+
 
         
         return Response({"message": "Event registered successfully"}, status=status.HTTP_200_OK)
