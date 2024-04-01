@@ -6,11 +6,12 @@ from django.conf.urls.static import static
 
 from core.api.student.event_register import StudentEventRegisterAPIView
 from core.api.student.event_type import EventTypeAPIView
-from core.api.student.home import StudentHomeAPIView
+from core.api.student.home import StudentEventSearchAPIView, StudentHomeAPIView
 
 
 urlpatterns = [
     path('home/',StudentHomeAPIView.as_view()),
     path('event/register/',StudentEventRegisterAPIView.as_view()),
     path('event/type',EventTypeAPIView.as_view()),
+    path('event/list',StudentEventSearchAPIView.as_view()),
 ]
