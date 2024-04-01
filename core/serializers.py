@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from account.views import CustomUserSerializer
 
-from core.models import EventJudges, Judge, Participant, Event, Certificate, Score
+from core.models import Event, Certificate, EventRegistration, JudgeScore
 
 
 
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Participant
+        model = EventRegistration
         fields = '__all__'
 
 class JudgeSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class JudgeSerializer(serializers.ModelSerializer):
     assigned_events_names = serializers.SerializerMethodField()
 
     class Meta:
-        model = Judge
+        model = JudgeScore
         fields = ['id', 'user_email', 'user_first_name', 'user_last_name', 'user_branch', 'assigned_events_names']
 
     def get_assigned_events_names(self, obj):
@@ -32,7 +32,7 @@ class ScoreSerializer(serializers.ModelSerializer):
     judge_name = serializers.SerializerMethodField()
 
     class Meta:
-        model = Score
+        model = JudgeScore
         fields = ['id', 'score', 'remarks', 'event', 'participant', 'judge', 'event_name', 'participant_name', 'judge_name']
 
     def get_event_name(self, obj):
