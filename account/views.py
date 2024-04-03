@@ -54,7 +54,7 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
 
             user = CustomUser.objects.create(
                 batch_year=batch_year,
-                is_active=False,
+                is_active=True,
                 **validated_data
             )
             user.set_password(validated_data['password'])
