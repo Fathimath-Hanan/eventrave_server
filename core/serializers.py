@@ -51,8 +51,10 @@ class CertificateSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, instance):
-        instance['event'] = EventSerializer(instance['event']).data
-        return super().to_representation(instance)
+        
+        data = super().to_representation(instance)
+        data['event'] = EventSerializer(instance['event']).data
+        return data
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
