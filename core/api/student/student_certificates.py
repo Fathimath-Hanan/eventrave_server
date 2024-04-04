@@ -9,7 +9,9 @@ from core.serializers import CertificateSerializer
 class StudentCertificateListAPIView(generics.ListCreateAPIView):
     serializer_class = CertificateSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ['event__name']  # Specify the field you want to search against
+    search_fields = ['event__name']
+     # Specify the field you want to search against
+    filterset_fields = ['user','event']
 
     def get_queryset(self):
         return Certificate.objects.all()
