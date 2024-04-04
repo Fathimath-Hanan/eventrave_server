@@ -53,7 +53,7 @@ class CertificateSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         
         data = super().to_representation(instance)
-        data['event'] = EventSerializer(instance['event']).data
+        data['event'] = EventSerializer(instance.event).data
         return data
 
 class EventSerializer(serializers.ModelSerializer):
