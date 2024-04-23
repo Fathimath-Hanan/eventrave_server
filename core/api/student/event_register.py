@@ -38,3 +38,16 @@ class StudentEventRegisterAPIView(APIView):
 
         
         return Response({"message": "Event registered successfully"}, status=status.HTTP_200_OK)
+    
+
+
+
+
+class DeleteRegisteredEvent(APIView):
+    def delete(self, request, event_id, member_id):
+        event = EventRegistration.objects.filter(event_id=event_id, student_id=member_id).first()
+        if event:
+            event.delete()
+            return Response({"message": "Event deleted successfully"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Event not found"}, status=status.HTTP_404_NOT_FOUND)
